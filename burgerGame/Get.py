@@ -33,4 +33,13 @@ class Get:
             self.position[2] += self.speed
 
     def get_check(self, ingredients):
-        for 
+        for ingredient in ingredients:
+            get = self.overlap(self.position,ingredient.position)
+
+            if get:
+                ingredient.state = 'die'
+                self.state = 'hit'
+
+    def overlap(self, ego_position, other_position):
+        return ego_position[0] > other_position[0] and ego_position[1] > other_position[1] \
+                 and ego_position[2] < other_position[2] and ego_position[3] < other_position[3]
